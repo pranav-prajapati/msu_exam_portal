@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WEBCAM</title>
+</head>
+<body>
+    
+    <div class="video-wrap">
+        <video id="video" playsinline autoplay> </video>
+    </div>
+
+    <div class="controller">
+        <button id="snap">capture</button>
+    </div>
+
+    <canvas id="canvas" height="400" width="800"></canvas>
+
+    <script>
+
+        'use strict';
+
+        const video=document.getElementById('video')
+        const canvas=document.getElementById('canvas')
+        const snap=document.getElementById('snap')
+        
+        console.log(video)
+        console.log(canvas)
+        console.log(snap)
+    
+        const constraints={
+            audio : true,
+            video : {
+                width : 400,
+                height : 400
+            }
+    
+        }
+    
+        async function init(){
+            try{
+                const stream= await navigator.mediaDevices.getUserMedia(constraints);
+                handleSuccess(stream)
+            }
+            catch(e){
+                console.log(`navigator.getUserMedia.error : ${e.toString()}`)
+            }
+        }
+    
+        function handleSuccess(stream){
+            window.stream = stream;
+            video.srcObject = stream;
+        }
+    
+        init();
+    
+        const context=canvas.getContext('2d')
+        snap.addEventListener('click',function(){
+            context.drawImage(video,0,0,480,480)
+            console.log('clicked')
+        })
+    
+    </script>
+</body>
+
+
+
+</html>
+
+<!-- <html>
+     <head>
+         <meta charset="utf-8" />
+         <title>Webcam</title>
+         <style>
+             #videoElement {
+               border: 30px solid #ccc;
+               background: green;
+               width: 400px;
+               height: 400px
+              }
+         </style>
+     </head>
+     <body>
+       <button>Start camera</button>
+           <br/>
+           <video autoplay="true" id="videoElement"></video>
+
+           <script type="text/javascript">
+                var video = document.querySelector("#videoElement");
+                navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUsermedia 
+                    || navigator.mozGetUserMedia || navigato.msGetUserMedia || navigator.oGetUserMedia;
+
+                    if(navigator.getUserMedia){
+                      navigator.getUserMedia({video:true}, handleVideo, videoError)      
+                    }
+
+                   unction handleVideo(stream){
+                    video.srcObject = stream;
+                    video.play();
+                    } f
+
+                    function videoError(e){}
+           </script> 
+     </body>
+</html> -->

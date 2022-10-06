@@ -1,0 +1,33 @@
+*{
+	padding: 0;
+	margin: 0;
+    box-sizing: border-box;
+    font-family: 'poppins', sans-serif;
+}
+
+
+
+body{
+    font-family: 'Poppins', sans-serif;
+    
+   
+}
+
+
+.container{
+    padding: 20px;
+    
+}
+
+
+.col {
+padding: 20px;
+}
+
+.col-md-3{
+    padding: 30px;
+}
+
+.container a{
+ width: 400px;
+}
